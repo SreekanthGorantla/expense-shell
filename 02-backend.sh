@@ -4,7 +4,8 @@ USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
-N="\e[om"
+N="\e[0m"
+
 LOGS_FOLDER="/var/log/backend-logs"
 LOG_FILE=$(echo $0 |cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
@@ -79,7 +80,7 @@ VALIDATE $? "Setting up the transactions schema and tables"
 systemctl daemon-reload &>> $LOG_FILE_NAME
 VALIDATE $? "Deamon Reload"
 
-systemctl enable backend &>> $LOG_FILE_NAME
+systemctl enable backend &>> $LOG_FILE_NAME 
 VALIDATE $? "Enabling backend"
 
 systemctl restart backend &>> $LOG_FILE_NAME
